@@ -3,9 +3,9 @@ import sys
 import xml.etree.cElementTree as ET
 
 def whole_thing_as_a_function(keyword):
-    ASSOCIATE_TAG = 'gipvsama-20'
-    ACCESS_KEY_ID = 'AKIAIARB46MNH2PWDECA'
-    SECRET_ACCESS_KEY='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'
+    ASSOCIATE_TAG = ''
+    ACCESS_KEY_ID = ''
+    SECRET_ACCESS_KEY=''
 
     amazon = bottlenose.Amazon(ACCESS_KEY_ID, SECRET_ACCESS_KEY, ASSOCIATE_TAG)
     url = '{http://webservices.amazon.com/AWSECommerceService/2011-08-01}'
