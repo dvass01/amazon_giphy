@@ -17,3 +17,12 @@ nav {
 header h1 a{
 	text-decoration: none;
 }
+
+div#game-container {
+    width:100%;
+}
+
+div#game-container div {
+    float:left;
+    clear
+}
