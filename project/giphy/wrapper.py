@@ -32,11 +32,11 @@ class AmGiphy:
     #     print(random_word)
     #     return random_word
 
-if __name__ == '__main__':
-    # print(os.getcwd())
-    from client.word_wrapper import RandWord
-    gif = AmGiphy()
-    phrase = RandWord()
-    gif.gif_search(phrase.get_random_word())
+# if __name__ == '__main__':
+#     # print(os.getcwd())
+#     from client.word_wrapper import RandWord
+#     gif = AmGiphy()
+#     phrase = RandWord()
+#     gif.gif_search(phrase.get_random_word())
 
 # gif.get_random_word()

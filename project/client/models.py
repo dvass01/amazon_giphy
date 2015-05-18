@@ -1,6 +1,9 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 import re
+from client.word_wrapper import RandWord
+from amazon.amazon_wrapper import AMZN
+from giphy.wrapper import AmGiphy
 # Create your models here.
 
 class Client(models.Model):
@@ -17,4 +20,15 @@ class Client(models.Model):
     name = models.CharField(max_length=255,unique=True,validators=[validate_name])
     password = models.CharField(max_length=255,validators=[validate_password])
     created_at = models.DateTimeField(auto_now_add=True)
-    # key = models.CharField(max_length=32)
+    # rounds = models.IntegerField()
+    # giphy_score = models.IntegerField()
+    # amazon_score = models.IntegerField()
+    
+    # def add_round_count(self):
+    #     self.round += 1
+
+    # def add_giphy_count(self):
+    #     self.giphy_score +=1
+    #
+    # def add_amazon_score(self):
+    #     self.amazon_score +=1

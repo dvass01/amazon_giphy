@@ -20,5 +20,5 @@ class RandWord:
         # print(lines)
         # print(randint(1, lines))
 
-rand = RandWord()
-rand.get_random_word()
+# rand = RandWord()
+# rand.get_random_word()

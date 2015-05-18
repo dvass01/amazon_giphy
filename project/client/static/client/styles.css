@@ -1,0 +1,19 @@
+nav {
+	background-color: rgba(239,12,12,0.5);
+	color: white;
+	font-family: impact;
+	text-align: left;
+}
+
+.container{
+
+	width: 300px;
+	text-align: center;
+	margin: 10px auto 10px auto;
+	padding: 25px;
+
+}
+
+header h1 a{
+	text-decoration: none;
+}
