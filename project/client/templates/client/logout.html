@@ -1,0 +1,17 @@
+{% extends 'users/base.html' %}
+{% load staticfiles %}
+
+        {% block content %}
+
+            <p>Click Button below to confirm logout</p>
+
+            <div class = "logout_form">
+
+                <form name="logout" action="/logout" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" value="Log Out">
+                </form>
+
+            </div>
+
+        {% endblock %}
