@@ -1,0 +1,29 @@
+{% extends "client/base.html" %}
+{% load staticfiles %}
+
+    {% block content %}
+
+            <div class = "login_form">
+
+                <h2>Login</h2>
+
+                <form name="login" action="/client/login" method="POST">
+                    {% csrf_token %}
+                    {{ client_form.as_ul }}
+                    <input type="submit" value="Log-in">
+                </form>
+
+            </div>
+            <div class = "registration_form">
+
+                <h2>Create Account</h2>
+
+                <form name="form" action="/client/register" method="POST">
+                    {% csrf_token %}
+                    {{ client_form.as_ul }}
+                    <input type="submit" value="Register">
+                </form>
+
+            </div>
+
+    {% endblock %}
