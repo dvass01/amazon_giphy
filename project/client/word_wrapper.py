@@ -7,7 +7,7 @@ class RandWord:
 
     def get_random_word(self):
         word_array = []
-        word_array = [line.strip() for line in open('words')]
+        word_array = [line.strip() for line in open('words','r')]
         # for word in word_array:
         #     print(word)
         # print()
