@@ -16,18 +16,22 @@
             <h1>Welcome to the Amazon vs. Giphy rater</h1>
         </header>
 
+        {% block nav %}
         <nav>
             {%if active_user %}
-              <a href="/gvd/logout/">Logout</a> |
-                <a href="/gvd/stats/">Stats</a> |
-                  <a href="/gvd/XXX/">Play Game</a>
+            <h1>Hi, {{active_user.name}}!</h1>
+              <a href="/gvd/logout">Logout</a> |
+                <a href="/gvd/stats">Stats</a> |
+                  <a href="/gvd/XXX">Play Game</a>
             {% else %}
-                <a href="/gvd/login/">Login</a> |
+                <a href="/gvd/login">Login</a> |
+                <a href="/gvd/register">Register</a>
             {% endif %}
         </nav>
+        {% endblock %}
 
         {% block content %}
-        {% block content %}
+        {% endblock %}
 
     </body>
 </html>

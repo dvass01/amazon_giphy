@@ -48,7 +48,7 @@ class LoginView(View):
 
 class RegisterView(View):
     empty_form = ClientForm()
-    template = 'client/login.html'
+    template = 'client/register.html'
 
     def get(self,request):
         if request.session.get('id'):
@@ -70,7 +70,7 @@ class RegisterView(View):
             new_client.save()
             request.session.flush()
             request.session['id'] = new_client.id
-            return redirect('/gvd/play')
+            return redirect('/gvd/index')
         return render(request,self.template,{'error':'Invalid input, please try again', 'client_form':self.empty_form})
 
 

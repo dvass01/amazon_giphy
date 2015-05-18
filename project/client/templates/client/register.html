@@ -7,9 +7,9 @@
             <img src="images/amzngiph.jpg" ="logo"/>
                 <div class = "registration_form">
                     <h2>Create Account</h2>
-                    <form name="form" action="/users/register" method="POST">
+                    <form name="form" action="/gvd/register" method="POST">
                         {% csrf_token %}
-                        {{ user_form.as_ul }} <!-- can also be form.as_p, form.as_ul -->
+                        {{ client_form.as_ul }} <!-- can also be form.as_p, form.as_ul -->
                         <input type="submit" value="Register">
                     </form>
                 </div>

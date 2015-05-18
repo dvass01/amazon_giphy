@@ -8,9 +8,9 @@
 
                     <h2>Login</h2>
 
-                        <form name="login" action="/users/login" method="POST">
+                        <form name="login" action="/gvd/login" method="POST">
                             {% csrf_token %}
-                            {{ user_form.as_ul }}
+                            {{ client_form.as_ul }}
                             <input type="submit" value="Log-in">
                         </form>
 
