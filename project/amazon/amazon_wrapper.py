@@ -5,7 +5,7 @@ from client.word_wrapper import RandWord
 
 class AMZN(bottlenose.Amazon):
     def __init__(self):
-        with open('amazon/secret_stuff.py','r') as f:
+        with open('amazon/secret_stuff','r') as f:
             lines = f.readlines()
             ASSOCIATE_TAG = lines[1].rstrip()
             ACCESS_KEY_ID = lines[3].rstrip()

@@ -15,9 +15,12 @@
 
                 <script id="template" type="text/template">
                         <p>{{keyword}}</p>
-                        <p><img src = "{{giphy_gif}}"/>{{giphy_gif}}</p>
-                        <p><img src = "{{amazon_image}}"/>{{amazon_image}}</p>
-                        <!-- <p><img src = "{{amazon_image}}"/>{{amazon_image}}</p> -->
+                        <div id="game-container">
+                            <div class="unselected"><p><img src="{{giphy_gif}}"/></p></div>
+                            <div id="game-text"><p>CHOOSE!</p></div>
+                            <div class="unselected"><p><img src="{{amazon_image}}"/></p></div>
+                        </div>
+                        <!-- <p><img src = "{{amazon_image}}"/></p> -->
                 </script>
 
             {% endverbatim %}
