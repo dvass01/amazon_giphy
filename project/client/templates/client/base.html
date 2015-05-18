@@ -1,28 +1,49 @@
- <!doctype html>
-{%load staticfiles%}
+{% load staticfiles %}
 <html lang="en">
 <head>
-
-  <title>Giphy Vs Amazon</title>
-
+	<title>Giphy Vs Amazon</title>
 <link rel="stylesheet" type="text/css" href= "{% static '/styles.css' %}">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
+<script src="{%static "client/main.js"%}"></script>
 </head>
 
-<body>
-<nav>
-{%if active_user %}
-  <a href="/logout/">Logout</a> |
-    <a href="/stats/">Stats</a> |
-      <a href="/XXX/">Play Game</a>
-  {% else %}
-    <a href="/login/">Login</a> |
-    {% endif %}
-</nav>
 
-{% block body_block %}{% endblock %}
-</body>
+    <body>
+
+        <div id = "header">
+
+
+                    {% block header %}
+            <h1>Welcome to the Amazon vs. Giphy rater</h1>
+                    {% endblock %}
+
+                {% if active_client %}
+
+                    <div id='client-link'>
+                        <ul>
+                            <li><a href="/gvd/logout">logout</a></li>
+
+                            <li><a href ="/gvd/my_page">{{active_client.name}}</a></li>
+                        </ul>
+                    </div>
+
+                {% else %}
+                    <div id='login-link'><a href="/gvd/login">login</a></div>
+                {% endif %}
+
+
+        </div>
+
+
+                {% block content %}
+                {% endblock %}
+
+
+
+                {% block footer %}
+                {% endblock %}
+    </body>
 </html>
-
 
