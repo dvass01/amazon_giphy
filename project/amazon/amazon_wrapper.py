@@ -4,7 +4,7 @@ import xml.etree.cElementTree as ET
 
 class AMZN(bottlenose.Amazon):
     def __init__(self):
-        with open('amazon/secret_stuff.py','r') as f:
+        with open('amazon/secret_stuff','r') as f:
             lines = f.readlines()
             ASSOCIATE_TAG = lines[1].rstrip()
             ACCESS_KEY_ID = lines[3].rstrip()
@@ -14,8 +14,9 @@ class AMZN(bottlenose.Amazon):
 
     def get_first_dvd_result(self, keyword):
         response = self.ItemSearch(Keywords=keyword, SearchIndex="DVD")
-
+        print("blabhlbhasdlhf")
         root = ET.fromstring(response.decode())
+        print(root)
         item_root = root.find(self.url+'Items')
         ASIN = item_root[4][0]
         return ASIN.text
@@ -29,9 +30,8 @@ class AMZN(bottlenose.Amazon):
         images_item_root = images_root.find(self.url+'Items')
 
         large_image = images_item_root[1][3]
-
         return large_image.find(self.url+'URL').text
 
-# if __name__ == '__main__':
-#     this_AMZN = AMZN()
-#     print(this_AMZN.get_image(sys.argv[1]))
+if __name__ == '__main__':
+    this_AMZN = AMZN()
+    print(this_AMZN.get_image(sys.argv[1]))

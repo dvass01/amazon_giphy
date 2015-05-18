@@ -112,10 +112,12 @@ class GameView(View):
     def get(self, request):
         print(self.gif)
         print(self.phrase_to_be)
-        print(self.new_amazon)
+        print(self.new_amazon.__dict__)
         keyword = self.phrase_to_be.get_random_word()
+        print(keyword)
         giphy_gif = self.gif.gif_search(keyword)[0]
-        # amazon_image = self.new_amazon.get_image(keyword)[0]
+        # amazon_image = self.new_amazon.get_image(keyword)
         # print(amazon_image)
+        # print(amazon_image[0])
         return JsonResponse({'keyword':keyword,'giphy_gif':giphy_gif})
         # 'amazon_image':amazon_image

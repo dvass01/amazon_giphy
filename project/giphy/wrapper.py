@@ -11,13 +11,13 @@ class AmGiphy:
 
     def gif_search(self, phrase):
         results_array = []
-        print(phrase)
+        # print(phrase)
         search_result = requests.get(self.search_url + phrase)
         # print(search_result.json)
         if search_result.json() != []:
             gif_dict = search_result.json()
             try:
-                print(gif_dict['data'][0]['images']['original']['url'])
+                # print(gif_dict['data'][0]['images']['original']['url'])
                 results_array.append(gif_dict['data'][0]['images']['original']['url'])
                 return results_array
             except:
