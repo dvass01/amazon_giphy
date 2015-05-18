@@ -5,9 +5,10 @@
 
   <title>Giphy Vs Amazon</title>
 
-<link rel="stylesheet" type="text/css" href= "{% static '/styles.css' %}">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
+<script src="{%static "client/main.js"%}"></script>
+<link rel="stylesheet" type="text/css" href= "{% static 'client/styles.css' %}">
 
 </head>
 
@@ -17,17 +18,19 @@
         </header>
 
         {% block nav %}
+
         <nav>
-            {%if active_user %}
-            <h1>Hi, {{active_user.name}}!</h1>
+            {%if active_client %}
+            <h1>Hi, {{active_client.name}}!</h1>
               <a href="/gvd/logout">Logout</a> |
                 <a href="/gvd/stats">Stats</a> |
-                  <a href="/gvd/XXX">Play Game</a>
+                  <a href="/gvd/play">Play Game</a>
             {% else %}
                 <a href="/gvd/login">Login</a> |
                 <a href="/gvd/register">Register</a>
             {% endif %}
         </nav>
+
         {% endblock %}
 
         {% block content %}

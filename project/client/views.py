@@ -6,6 +6,9 @@ from django.views.generic import View
 from django.http import JsonResponse,Http404
 import json
 import requests
+from client.word_wrapper import RandWord
+from amazon.amazon_wrapper import AMZN
+from giphy.wrapper import AmGiphy
 
 
 class IndexView(View):
@@ -63,7 +66,6 @@ class RegisterView(View):
         if submitted_form.is_valid():
             name = submitted_form.cleaned_data.get('name')
             payload = {'name':name}
-            r = requests.post(self.create_url,data=payload)
             submitted_password = submitted_form.cleaned_data.get('password')
             password = make_password(submitted_password)
             new_client = Client(name = name, password = password)
@@ -91,12 +93,24 @@ class LogoutView(View):
 
 
 class PlayView(View):
-    template = 'client/game.html'
+    template = 'client/play.html'
 
     def get(self,request):
         if request.session.get('id'):
             active_client_id = request.session.get('id')
             if Client.objects.filter(id=active_client_id):
                 active_client = Client.objects.filter(id=active_client_id)[0]
-            return render(request,self.template,{'active_client':active_client})
+                return render(request,self.template,{'active_client':active_client})
         return render(request, self.template)
+
+
+class GameView(View):
+    gif = AmGiphy()
+    phrase_to_be = RandWord()
+    this_AMZN = AMZN()
+    keyword = phrase_to_be.get_random_word()
+    # amazon_image = self.this_AMZN.get_image(self.keyword)
+    def get(self, request):
+        giphy_gif = self.gif.gif_search(self.keyword)[0]
+    # print(amazon_image)
+        return JsonResponse({'keyword':self.keyword,'giphy_gif':giphy_gif})
