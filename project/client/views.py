@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from interface.forms import lientForm
+from client.forms import ClientForm
 from client.models import Client
 from django.contrib.auth.hashers import make_password,check_password
 from django.views.generic import View
@@ -9,27 +9,27 @@ import requests
 
 
 class IndexView(View):
-    template = 'interface/index.html'
+    template = 'client/index.html'
     all_clients = Client.objects.all()
 
     def get(self,request):
-        if request.session.get('key'):
-            active_client_key = request.session.get('key')
-            if Client.objects.filter(key=active_client_key):
-                active_client = Client.objects.filter(key=active_client_key)[0]
+        if request.session.get('id'):
+            active_client_id = request.session.get('id')
+            if Client.objects.filter(id=active_client_id):
+                active_client = Client.objects.filter(id=active_client_id)[0]
                 return render(request,self.template,{'active_client':active_client})
         return render(request, self.template)
 
 
 class LoginView(View):
-    template = 'interface/login.html'
+    template = 'client/login.html'
     empty_form = ClientForm()
 
     def get(self,request):
-        if request.session.get('key'):
-            active_client_key = request.session.get('key')
-            if Client.objects.filter(key=active_client_key):
-                active_client = Client.objects.filter(key=active_client_key)[0]
+        if request.session.get('id'):
+            active_client_id = request.session.get('id')
+            if Client.objects.filter(id=active_client_id):
+                active_client = Client.objects.filter(id=active_client_id)[0]
                 return render(request,self.template,{'client_form':self.empty_form, 'active_client':active_client})
         return render(request,self.template,{'client_form':self.empty_form})
 
@@ -40,78 +40,64 @@ class LoginView(View):
             loggin_in_client = Client.objects.filter(name=name)[0]
             if check_password(password, loggin_in_client.password):
                 request.session.flush()
-                request.session['key'] = loggin_in_client.key
-                return redirect('/interface/my_page')
+                request.session['id'] = loggin_in_client.id
+                return redirect('/gvd/my_page')
             return render(request, self.template, {'error':'Name and/or password incorrect.  Please try again.', 'login_form':self.empty_form})
-        return redirect('/interface/login')
+        return redirect('/gvd/login')
 
 
 class RegisterView(View):
-    empty_form = lientForm()
-    template = 'interface/login.html'
+    empty_form = ClientForm()
+    template = 'client/login.html'
     create_url = 'http://127.0.0.1:8000/api/create_client'
 
     def get(self,request):
-        if request.session.get('key'):
-            active_client_key = request.session.get('key')
-            if Client.objects.filter(key=active_client_key):
-                active_client = Client.objects.filter(key=active_client_key)[0]
+        if request.session.get('id'):
+            active_client_id = request.session.get('id')
+            if Client.objects.filter(id=active_client_id):
+                active_client = Client.objects.filter(id=active_client_id)[0]
                 return render(request,self.template,{'client_form':self.empty_form,'active_client':active_client})
         return render(request,self.template,{'client_form':self.empty_form})
 
     def post(self,request):
-        submitted_form = lientForm(request.POST)
+        submitted_form = ClientForm(request.POST)
         if submitted_form.is_valid():
             name = submitted_form.cleaned_data.get('name')
             payload = {'name':name}
             r = requests.post(self.create_url,data=payload)
             submitted_password = submitted_form.cleaned_data.get('password')
             password = make_password(submitted_password)
-            new_client = Client(name = name, password = password, key = r.json()['new_client']['key'])
+            new_client = Client(name = name, password = password)
             new_client.save()
             request.session.flush()
-            request.session['key'] = new_client.key
-            return redirect('/interface/my_page')
+            request.session['id'] = new_client.id
+            return redirect('/gvd/play')
         return render(request,self.template,{'error':'Invalid input, please try again', 'client_form':self.empty_form})
 
 
 class LogoutView(View):
-    template = 'interface/logout.html'
+    template = 'client/logout.html'
 
     def get(self,request):
-        if request.session.get('key'):
-            active_client_key = request.session.get('key')
-            if Client.objects.filter(key=active_client_key):
-                active_client = Client.objects.filter(key=active_client_key)[0]
+        if request.session.get('id'):
+            active_client_id = request.session.get('id')
+            if Client.objects.filter(id=active_client_id):
+                active_client = Client.objects.filter(id=active_client_id)[0]
                 return render(request,self.template,{'active_client':active_client})
-        return redirect('/interface/index')
+        return redirect('/gvd/index')
 
     def post(self,request):
         request.session.flush()
-        return redirect('/interface/index')
-#
-# class ClientView(View):
-#     template = 'interface/account.html'
-#
-#     def get(self,request):
-#         if request.session.get('key'):
-#             active_client_key = request.session.get('key')
-#             if Client.objects.filter(key=active_client_key):
-#                 active_client = Client.objects.filter(key=active_client_key)[0]
-#                 return render(request,self.template,{'active_client':active_client})
-#         return redirect('/interface/login')
-#
-# class AllActivityView(View):
-#     all_todos_url = 'http://127.0.0.1:8000/api/get_all/'
-#
-#     def get(self,request):
-#         if request.session.get('key'):
-#             active_client_key = request.session.get('key')
-#             if Client.objects.filter(key=active_client_key):
-#                 active_client = Client.objects.filter(key=active_client_key)[0]
-#                 r = requests.get(self.all_todos_url+active_client_key)
-#                 full_activity_dict = r.json()['all_todos']
-#                 return JsonResponse({'todos':[(activity['activity'],activity['status'],activity['created_at']) for activity in full_activity_dict]})
-#
-# class CreateActivity(View):
-#     create_todo_url = 'http://127.0.0.1:8000/api/create_todo/'
+        return redirect('/gvd/index')
+
+
+class PlayView(View):
+    template = 'client/game.html'
+
+    def get(self,request):
+        if request.session.get('id'):
+            active_client_id = request.session.get('id')
+            if Client.objects.filter(id=active_client_id):
+                active_client = Client.objects.filter(id=active_client_id)[0]
+            return render(request,self.template,{'active_client':active_client})
+        return render(request, self.template)
