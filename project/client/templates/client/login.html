@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href= "{% static '/styles.css' %}">
+    </head>
+
+        <div class = "container">
+                <img src="images/amzngiph.jpg" ="logo" width='800' height='316'/>
+                <div class = "login_form">
+                    <h2>Login</h2>
+                    <form name="login" action="/users/login" method="POST">
+                        {% csrf_token %}
+                        {{ user_form.as_ul }}
+                        <input type="submit" value="Log-in">
+                    </form>
+
+                </div>
+
+                
+        </div>
+    </body>
+</html>
