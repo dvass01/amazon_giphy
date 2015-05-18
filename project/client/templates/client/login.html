@@ -3,28 +3,20 @@
 
     {% block content %}
 
-            <div class = "login_form">
+        <div class = "container">
+                <img src = "images/amzngiph.jpg" name="logo" width='800' height='316'/>
+                <div class = "login_form">
 
-                <h2>Login</h2>
+                    <h2>Login</h2>
 
-                <form name="login" action="/gvd/login" method="POST">
-                    {% csrf_token %}
-                    {{ client_form.as_ul }}
-                    <input type="submit" value="Log-in">
-                </form>
+                        <form name="login" action="/gvd/login" method="POST">
+                            {% csrf_token %}
+                            {{ client_form.as_ul }}
+                            <input type="submit" value="Log-in">
+                        </form>
 
-            </div>
-            <div class = "registration_form">
+                </div>
 
-                <h2>Create Account</h2>
-
-                <form name="form" action="/gvd/register" method="POST">
-                    {% csrf_token %}
-                    {{ client_form.as_ul }}
-                    <input type="submit" value="Register">
-                </form>
-
-            </div>
-
+        </div>
     {% endblock %}
 

@@ -7,7 +7,7 @@ class RandWord:
 
     def get_random_word(self):
         word_array = []
-        word_array = [line.strip() for line in open('words')]
+        word_array = [line.strip() for line in open('client/words')]
         # for word in word_array:
         #     print(word)
         # print()
@@ -20,5 +20,5 @@ class RandWord:
         # print(lines)
         # print(randint(1, lines))
 
-rand = RandWord()
-rand.get_random_word()
+# rand = RandWord()
+# rand.get_random_word()

@@ -1,22 +1,18 @@
+{% extends "client/base.html" %}
 {% load staticfiles %}
-<html>
-    <head>
-        <!-- <link rel="stylesheet" type="text/css" href= "{% static 'users/main.css' %}"> -->
-    </head>
+
+    {% block content %}
 
         <div class = "container">
-            <img src="images/amzngiph.jpg" ="logo"/>
+            <img src= "images/amzngiph.jpg" name="logo"/>
                 <div class = "registration_form">
                     <h2>Create Account</h2>
-                    <form name="form" action="/users/register" method="POST">
+                    <form name="form" action="/gvd/register" method="POST">
                         {% csrf_token %}
-                        {{ user_form.as_ul }} <!-- can also be form.as_p, form.as_ul -->
+                        {{ client_form.as_ul }} <!-- can also be form.as_p, form.as_ul -->
                         <input type="submit" value="Register">
                     </form>
                 </div>
-                </div>
 
-                
         </div>
-    </body>
-</html>
+    {% endblock %}

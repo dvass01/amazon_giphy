@@ -1,6 +1,6 @@
 from django.conf.urls import include, url,patterns
 from django.contrib import admin
-from client.views import IndexView,LoginView,RegisterView,LogoutView,PlayView
+from client.views import IndexView,LoginView,RegisterView,LogoutView,PlayView,GameView
 
 
 urlpatterns = patterns('',
@@ -15,6 +15,5 @@ urlpatterns = patterns('',
 
     url(r'^play$',PlayView.as_view()),
 
-    url(r'^api/words/(?P<phrase>[\w\']+)$', 'client.word_wrapper.get_random_word', name='get_random_word'),
-
+    url(r'^play/game',GameView.as_view()),
 )

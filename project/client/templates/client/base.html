@@ -1,49 +1,43 @@
-{% load staticfiles %}
+<!doctype html>
+{%load staticfiles%}
 <html lang="en">
 <head>
-	<title>Giphy Vs Amazon</title>
-<link rel="stylesheet" type="text/css" href= "{% static '/styles.css' %}">
+
+  <title>Giphy Vs Amazon</title>
+
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
 <script src="{%static "client/main.js"%}"></script>
+<link rel="stylesheet" type="text/css" href= "{% static 'client/styles.css' %}">
+
 </head>
 
 
     <body>
+        <header>
+            <h1>Welcome to the <a href = "/gvd/index">Amazon vs. Giphy</a> rater</h1>
+        </header>
 
-        <div id = "header">
+        {% block nav %}
 
+        <nav>
+            {%if active_client %}
+            <h1>Hi, {{active_client.name}}!</h1>
+              <a href="/gvd/logout">Logout</a> |
+                <a href="/gvd/stats">Stats</a> |
+                  <a href="/gvd/play">Play Game</a>
+            {% else %}
+                <a href="/gvd/login">Login</a> |
+                <a href="/gvd/register">Register</a>
+            {% endif %}
+        </nav>
 
-                    {% block header %}
-            <h1>Welcome to the Amazon vs. Giphy rater</h1>
-                    {% endblock %}
+        {% endblock %}
 
-                {% if active_client %}
+        {% block content %}
+        {% endblock %}
 
-                    <div id='client-link'>
-                        <ul>
-                            <li><a href="/gvd/logout">logout</a></li>
-
-                            <li><a href ="/gvd/my_page">{{active_client.name}}</a></li>
-                        </ul>
-                    </div>
-
-                {% else %}
-                    <div id='login-link'><a href="/gvd/login">login</a></div>
-                {% endif %}
-
-
-        </div>
-
-
-                {% block content %}
-                {% endblock %}
-
-
-
-                {% block footer %}
-                {% endblock %}
     </body>
 </html>
 

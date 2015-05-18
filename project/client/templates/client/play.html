@@ -1,8 +1,25 @@
-{% extends 'base.html' %}
+{% extends 'client/base.html' %}
+{% load staticfiles %}
 
 
-{% block body_block %}
-<script src="{%static "AMAZON.js"%}"></script>
-<script src="{%static "GIPHY.js"%}"></script>
+    {% block content %}
 
-{% endblock %}
+        <!-- // <script src="{%static "AMAZON.js"%}"></script>
+        // <script src="{%static "GIPHY.js"%}"></script> -->
+
+            <p id = "go_link"><a href="/gvd/play/game">GO!</a></p>
+
+            <div class = "api_calls"></div>
+
+            {% verbatim %}
+
+                <script id="template" type="text/template">
+                        <p>{{keyword}}</p>
+                        <p><img src = "{{giphy_gif}}"/>{{giphy_gif}}</p>
+                        <p><img src = "{{amazon_image}}"/>{{amazon_image}}</p>
+                        <!-- <p><img src = "{{amazon_image}}"/>{{amazon_image}}</p> -->
+                </script>
+
+            {% endverbatim %}
+
+    {% endblock %}
