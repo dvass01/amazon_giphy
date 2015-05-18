@@ -4,7 +4,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
-<script src="{%static "interface/main.js"%}"></script>
+<script src="{%static "client/main.js"%}"></script>
 </head>
 
     <body>
@@ -13,21 +13,21 @@
 
 
                     {% block header %}
-            <h1>Welcome to the ToDo Guru, powered by ToDoAPI</h1>
+            <h1>Welcome to the Amazon vs. Giphy rater</h1>
                     {% endblock %}
 
                 {% if active_client %}
 
                     <div id='client-link'>
                         <ul>
-                            <li><a href="/interface/logout">logout</a></li>
+                            <li><a href="/gvd/logout">logout</a></li>
 
-                            <li><a href ="/clients/my_page">{{active_client.name}}</a></li>
+                            <li><a href ="/gvd/my_page">{{active_client.name}}</a></li>
                         </ul>
                     </div>
 
                 {% else %}
-                    <div id='login-link'><a href="/interface/login">login</a></div>
+                    <div id='login-link'><a href="/gvd/login">login</a></div>
                 {% endif %}
 
 

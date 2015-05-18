@@ -22,7 +22,7 @@ class AMZN(bottlenose.Amazon):
 
     def get_image(self, keyword):
         this_ASIN = self.get_first_dvd_result(keyword)
-        
+
         images_response = self.ItemLookup(ItemId=this_ASIN, ResponseGroup='Images')
 
         images_root = ET.fromstring(images_response.decode())
