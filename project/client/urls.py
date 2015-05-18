@@ -14,8 +14,6 @@ urlpatterns = patterns('',
 
     url(r'^logout$',LogoutView.as_view()),
 
-    # url(r'^my_page$', ClientView.as_view()),
-
-    #gets
+    url(r'^api/words/(?P<phrase>[\w\']+$', 'client.views.get_random_word', name='get_random_word'),
 
 )
