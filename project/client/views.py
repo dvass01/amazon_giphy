@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render,redirect
-from interface.forms import lientForm
+from client.forms import ClientForm
 from client.models import Client
 from django.contrib.auth.hashers import make_password,check_password
 from django.views.generic import View
@@ -12,7 +12,7 @@ import requests
 
 
 class IndexView(View):
-    template = 'interface/index.html'
+    template = 'client/index.html'
     all_clients = Client.objects.all()
 
     def get(self,request):
@@ -25,7 +25,7 @@ class IndexView(View):
 
 
 class LoginView(View):
-    template = 'interface/login.html'
+    template = 'client/login.html'
     empty_form = ClientForm()
 
     def get(self,request):
@@ -44,14 +44,14 @@ class LoginView(View):
             if check_password(password, loggin_in_client.password):
                 request.session.flush()
                 request.session['key'] = loggin_in_client.key
-                return redirect('/interface/my_page')
+                return redirect('/client/my_page')
             return render(request, self.template, {'error':'Name and/or password incorrect.  Please try again.', 'login_form':self.empty_form})
-        return redirect('/interface/login')
+        return redirect('/client/login')
 
 
 class RegisterView(View):
-    empty_form = lientForm()
-    template = 'interface/login.html'
+    empty_form = ClientForm()
+    template = 'client/login.html'
     create_url = 'http://127.0.0.1:8000/api/create_client'
 
     def get(self,request):
@@ -74,12 +74,12 @@ class RegisterView(View):
             new_client.save()
             request.session.flush()
             request.session['key'] = new_client.key
-            return redirect('/interface/my_page')
+            return redirect('/client/my_page')
         return render(request,self.template,{'error':'Invalid input, please try again', 'client_form':self.empty_form})
 
 
 class LogoutView(View):
-    template = 'interface/logout.html'
+    template = 'client/logout.html'
 
     def get(self,request):
         if request.session.get('key'):
@@ -87,14 +87,14 @@ class LogoutView(View):
             if Client.objects.filter(key=active_client_key):
                 active_client = Client.objects.filter(key=active_client_key)[0]
                 return render(request,self.template,{'active_client':active_client})
-        return redirect('/interface/index')
+        return redirect('/client/index')
 
     def post(self,request):
         request.session.flush()
-        return redirect('/interface/index')
+        return redirect('/client/index')
 #
 # class ClientView(View):
-#     template = 'interface/account.html'
+#     template = 'client/account.html'
 #
 #     def get(self,request):
 #         if request.session.get('key'):
@@ -102,7 +102,7 @@ class LogoutView(View):
 #             if Client.objects.filter(key=active_client_key):
 #                 active_client = Client.objects.filter(key=active_client_key)[0]
 #                 return render(request,self.template,{'active_client':active_client})
-#         return redirect('/interface/login')
+#         return redirect('/client/login')
 #
 # class AllActivityView(View):
 #     all_todos_url = 'http://127.0.0.1:8000/api/get_all/'

@@ -1,6 +1,6 @@
 from django.conf.urls import include, url,patterns
 from django.contrib import admin
-from interface.views import IndexView,LoginView,RegisterView,LogoutView
+from client.views import IndexView,LoginView,RegisterView,LogoutView
 from django.views.decorators.csrf import csrf_exempt
 
 
