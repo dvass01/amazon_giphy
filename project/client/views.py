@@ -41,7 +41,7 @@ class LoginView(View):
             if check_password(password, loggin_in_client.password):
                 request.session.flush()
                 request.session['id'] = loggin_in_client.id
-                return redirect('/gvd/my_page')
+                return redirect('/gvd/play')
             return render(request, self.template, {'error':'Name and/or password incorrect.  Please try again.', 'login_form':self.empty_form})
         return redirect('/gvd/login')
 
@@ -49,7 +49,6 @@ class LoginView(View):
 class RegisterView(View):
     empty_form = ClientForm()
     template = 'client/login.html'
-    create_url = 'http://127.0.0.1:8000/api/create_client'
 
     def get(self,request):
         if request.session.get('id'):
