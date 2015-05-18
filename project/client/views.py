@@ -105,13 +105,15 @@ class PlayView(View):
 
 
 class GameView(View):
-    gif = AmGiphy()
     phrase_to_be = RandWord()
+    gif = AmGiphy()
     # this_AMZN = AMZN()
-    keyword = phrase_to_be.get_random_word()
-    # amazon_image = this_AMZN.get_image(keyword)
-    giphy_gif = gif.gif_search(keyword)[0]
 
     def get(self, request):
-        return JsonResponse({'keyword':self.keyword,'giphy_gif':self.giphy_gif})
+        keyword = self.phrase_to_be.get_random_word()
+        giphy_gif = self.gif.gif_search(keyword)[0]
+        # amazon_image = self.this_AMZN.get_image(keyword)
+        # print(amazon_image)
+        return JsonResponse({'keyword':keyword,'giphy_gif':giphy_gif})
+        # ,'amazon_image':amazon_image
         # 'amazon_image':self.amazon_image,
