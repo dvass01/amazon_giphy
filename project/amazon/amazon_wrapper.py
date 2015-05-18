@@ -1,6 +1,7 @@
 import bottlenose
 import sys
 import xml.etree.cElementTree as ET
+from client.word_wrapper import RandWord
 
 class AMZN(bottlenose.Amazon):
     def __init__(self):
@@ -32,6 +33,9 @@ class AMZN(bottlenose.Amazon):
 
         return large_image.find(self.url+'URL').text
 
-# if __name__ == '__main__':
-#     this_AMZN = AMZN()
-#     print(this_AMZN.get_image(sys.argv[1]))
+if __name__ == '__main__':
+    this_AMZN = AMZN()
+    print(this_AMZN.get_image(sys.argv[1]))
+    #rand = RandWord()
+    #print(this_AMZN.get_image(rand.get_random_word()))
+
