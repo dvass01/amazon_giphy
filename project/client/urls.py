@@ -1,7 +1,6 @@
 from django.conf.urls import include, url,patterns
 from django.contrib import admin
-from interface.views import IndexView,LoginView,RegisterView,LogoutView
-from django.views.decorators.csrf import csrf_exempt
+from client.views import IndexView,LoginView,RegisterView,LogoutView,PlayView
 
 
 urlpatterns = patterns('',
@@ -14,6 +13,8 @@ urlpatterns = patterns('',
 
     url(r'^logout$',LogoutView.as_view()),
 
-    url(r'^api/words/(?P<phrase>[\w\']+$', 'client.views.get_random_word', name='get_random_word'),
+    url(r'^play$',PlayView.as_view()),
+
+    url(r'^api/words/(?P<phrase>[\w\']+)$', 'client.word_wrapper.get_random_word', name='get_random_word'),
 
 )

@@ -1,7 +1,7 @@
 from django.forms import ModelForm
-from interface.models import Client
+from client.models import Client
 
-class Client(ModelForm):
+class ClientForm(ModelForm):
     class Meta:
         model = Client
         fields = ['name', 'password']
