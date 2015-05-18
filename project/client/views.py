@@ -1,6 +1,3 @@
-from django.shortcuts import render
-
-# Create your views here.
 from django.shortcuts import render,redirect
 from interface.forms import lientForm
 from client.models import Client
